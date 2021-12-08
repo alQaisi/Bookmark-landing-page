@@ -87,13 +87,13 @@ function resizeWindow(evt){
 //// Menu Overlay End
 
 //// Email Check Start
-
 var input=document.querySelector(".input");
 var email=document.querySelector("[type=text]");
 var contact=document.querySelector(".contact button");
 const regex=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 contact.addEventListener('click',()=>{
     var text=email.value;
+    text.replace(/\s/g,'');
     var result=String(text).toLocaleLowerCase().match(regex);
     if(result==null)
         input.classList.add("warning");
@@ -102,3 +102,4 @@ contact.addEventListener('click',()=>{
         alert("Thank you !");
     }
 });
+//// Email Check End
