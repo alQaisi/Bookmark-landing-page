@@ -87,14 +87,12 @@ function resizeWindow(evt){
 //// Menu Overlay End
 
 //// Email Check Start
+var form=document.querySelector("form");
 var input=document.querySelector(".input");
-var email=document.querySelector("[type=text]");
-var contact=document.querySelector(".contact button");
 const regex=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-function checkEmail(){
-    var text=email.value;
-    text.replace(/\s/g,'');
-    var result=String(text).toLocaleLowerCase().match(regex);
+function checkEmail(email){
+    email.replace(/\s/g,'');
+    var result=String(email).toLocaleLowerCase().match(regex);
     if(result==null)
         input.classList.add("warning");
     else{
@@ -102,6 +100,9 @@ function checkEmail(){
         alert("Thank you !");
     }
 }
-contact.addEventListener('click',checkEmail);
-email.addEventListener('keydown',(evt)=>evt.key=="Enter"?checkEmail():null);
+form.addEventListener('submit',evt=>{
+    evt.preventDefault();
+    var email=evt.srcElement[0].value;
+    checkEmail(email);
+});
 //// Email Check End
